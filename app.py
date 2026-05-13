@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 #    root_path=BASE_DIR,
 #    ...
 # )
-)
+
 
 COLUMNAS = [
 'symboling','normalized_losses','make','fuel_type','aspiration',
