@@ -35,7 +35,7 @@ COLUMNAS = [
 
 COLUMNAS_ENTRADA = [c for c in COLUMNAS if c != 'price']
 
-_dataset_path = os.path.join(BASE_DIR, 'dataset', 'imports-85.data')
+_dataset_path = os.path.join(BASE_DIR, 'imports-85.data')
 df = pd.read_csv(_dataset_path, header=None, names=COLUMNAS)
 df = df.replace('?', np.nan)
 
