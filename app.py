@@ -1,14 +1,12 @@
-import time
-
-from flask import Flask, render_template, request, url_for
+import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-from werkzeug.utils import secure_filename
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
+# Importaciones de tu lógica de ML
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
@@ -17,11 +15,11 @@ from sklearn.metrics import confusion_matrix, accuracy_score, classification_rep
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-app = Flask(
-    __name__,
-    root_path=BASE_DIR,
-    static_folder=os.path.join(BASE_DIR, 'static'),
-    template_folder=os.path.join(BASE_DIR, 'templates'),
+# app = Flask(
+#    __name__,
+#    root_path=BASE_DIR,
+#    ...
+# )
 )
 
 COLUMNAS = [
@@ -485,12 +483,25 @@ def lotes():
         error=error,
         info=info,
     )
+# --- CODIGO CORREGIDO PARA STREAMLIT ---
 
-@app.route('/compartir')
-def compartir():
-    return render_template('compartir.html')
+# Comentamos las funciones de Flask que no funcionan aquí
+# @app.route('/compartir')
+# def compartir():
+#    return render_template('compartir.html')
 
+# En lugar de app.run(), usamos comandos de Streamlit para mostrar resultados
+if resultados:
+    st.success("¡Predicción completada!")
+    st.write("### Resultados:")
+    st.write(resultados)
+    
+    if info:
+        st.info(info)
 
+if error:
+    st.error(error)
+
+# El bloque if __name__ == '__main__': ya no necesita app.run()
 if __name__ == '__main__':
-    _port = int(os.environ.get('PORT', 10000))
-    app.run(debug=True, host='0.0.0.0', port=_port)
+    st.write("La aplicación está lista y corriendo en Streamlit.")
